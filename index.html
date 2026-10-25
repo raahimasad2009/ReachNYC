@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReachNYC</title>
+    <meta name="description" content="Find free robotics, coding, science and design programs near you in New York City. Also in Español, Русский and اردو.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600&family=Rubik:wght@400..800&family=Noto+Naskh+Arabic:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="website/style.css">
+</head>
+<body>
+    <div class="topbar">
+        <p class="brand">Reach<span>NYC</span></p>
+        <div class="topbar-actions">
+            <button type="button" class="mylist" id="mylist" aria-pressed="false"></button>
+            <label class="lang">
+                <span class="visually-hidden" id="lang-label">Language</span>
+                <select id="lang" aria-labelledby="lang-label"></select>
+            </label>
+        </div>
+    </div>
+
+    <header class="hero">
+        <h1 data-text="heroTitle">What do you want to do after school?</h1>
+        <p class="hero-sub" data-text="heroSub"></p>
+        <svg class="doodle star-a" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3l4.6 11.4L37 15.6l-9.6 8 3.2 12.4L20 29l-10.6 7 3.2-12.4-9.6-8 12.4-1.2z"/></svg>
+        <svg class="doodle star-b" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3l4.6 11.4L37 15.6l-9.6 8 3.2 12.4L20 29l-10.6 7 3.2-12.4-9.6-8 12.4-1.2z"/></svg>
+    </header>
+
+    <main class="layout">
+        <form class="profile" id="profile" autocomplete="off" aria-labelledby="form-title">
+            <h2 id="form-title" class="form-title" data-text="formTitle"></h2>
+
+            <section class="step">
+                <h3 class="step-title"><span class="step-num" aria-hidden="true">1</span><span data-text="step1"></span></h3>
+                <button type="button" class="locate" id="locate" data-text="useLocation"></button>
+                <label for="place" class="or" data-text="orType"></label>
+                <input id="place" list="place-list" data-placeholder="placePlaceholder" inputmode="search">
+                <datalist id="place-list"></datalist>
+                <p class="hint" id="place-hint" aria-live="polite"></p>
+            </section>
+
+            <section class="step">
+                <h3 class="step-title"><span class="step-num" aria-hidden="true">2</span><label for="grade" data-text="step2"></label></h3>
+                <select id="grade"></select>
+            </section>
+
+            <fieldset class="step">
+                <legend class="step-title"><span class="step-num" aria-hidden="true">3</span><span data-text="step3"></span></legend>
+                <p class="hint" data-text="pickMany"></p>
+                <div class="chips" id="interests"></div>
+            </fieldset>
+
+            <details class="more">
+                <summary data-text="moreOptions"></summary>
+                <div class="field" id="ride-field">
+                    <label for="maxCommute"><span data-text="longestTrip"></span> <output id="maxCommuteOut" for="maxCommute">45 min</output></label>
+                    <input type="range" id="maxCommute" min="15" max="90" step="5" value="45">
+                </div>
+                <fieldset class="field">
+                    <legend data-text="whenGo"></legend>
+                    <div class="chips" id="seasons">
+                        <label class="chip"><input type="checkbox" value="school_year"><span data-text="seasonSchoolYear"></span></label>
+                        <label class="chip"><input type="checkbox" value="summer"><span data-text="seasonSummer"></span></label>
+                        <label class="chip"><input type="checkbox" value="spring_break"><span data-text="seasonSpring"></span></label>
+                    </div>
+                </fieldset>
+                <fieldset class="field">
+                    <legend data-text="inPersonOnline"></legend>
+                    <div class="chips" id="formats">
+                        <label class="chip"><input type="checkbox" value="in_person"><span data-text="inPerson"></span></label>
+                        <label class="chip"><input type="checkbox" value="online"><span data-text="online"></span></label>
+                    </div>
+                </fieldset>
+                <div class="field">
+                    <label for="school" data-text="schoolKind"></label>
+                    <select id="school">
+                        <option value="" data-text="schoolSkip"></option>
+                        <option value="public" data-text="schoolPublic"></option>
+                        <option value="charter" data-text="schoolCharter"></option>
+                        <option value="private" data-text="schoolPrivate"></option>
+                        <option value="homeschool" data-text="schoolHome"></option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="age"><span data-text="ageQ"></span> <span class="optional" data-text="optional"></span></label>
+                    <input id="age" type="number" min="4" max="19" inputmode="numeric">
+                </div>
+            </details>
+
+            <div class="go">
+                <button type="submit" class="find" id="find"></button>
+                <p class="note" aria-hidden="true" data-text="takesASecond"></p>
+            </div>
+        </form>
+
+        <section class="results" id="results" aria-labelledby="results-title" tabindex="-1">
+            <div class="results-head" id="results-head" hidden>
+                <div>
+                    <h2 id="results-title" class="results-title"></h2>
+                    <p id="results-sub" class="results-sub"></p>
+                </div>
+                <div class="tools">
+                    <div class="sort" role="group" id="sort">
+                        <label class="pill"><input type="radio" name="sort" value="closest" checked><span data-text="sortClosest"></span></label>
+                        <label class="pill"><input type="radio" name="sort" value="match"><span data-text="sortMatch"></span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="list-bar" id="list-bar" hidden>
+                <p data-text="listBar"></p>
+                <button type="button" class="print" id="print" data-text="printList"></button>
+            </div>
+            <div id="start" class="start">
+                <p class="start-big" data-text="startBig"></p>
+                <p data-text="startSmall"></p>
+            </div>
+            <p id="status" class="visually-hidden" aria-live="polite"></p>
+            <div id="groups"></div>
+            <details class="hidden-programs" id="hidden-wrap" hidden>
+                <summary id="hidden-summary"></summary>
+                <ul id="hidden-list"></ul>
+            </details>
+        </section>
+    </main>
+
+    <section class="voices" id="voices" aria-labelledby="voices-title" hidden>
+        <h2 id="voices-title" class="voices-title" data-text="voicesTitle"></h2>
+        <ul class="quotes" id="quotes"></ul>
+    </section>
+
+    <footer class="footnote" id="footnote"></footer>
+
+    <template id="program-template">
+        <li class="program">
+            <div class="trip">
+                <p class="trip-main"></p>
+                <p class="trip-lines"></p>
+                <p class="trip-detail"></p>
+            </div>
+            <div class="info">
+                <h4 class="name"></h4>
+                <p class="provider"></p>
+                <p class="summary"></p>
+                <p class="tags"></p>
+                <ul class="reasons"></ul>
+                <ul class="cautions"></ul>
+                <div class="actions">
+                    <a class="see" target="_blank" rel="noopener"></a>
+                    <button type="button" class="save" aria-pressed="false"></button>
+                    <a class="cal" hidden></a>
+                    <details class="details">
+                        <summary></summary>
+                        <dl class="facts"></dl>
+                    </details>
+                </div>
+            </div>
+        </li>
+    </template>
+
+    <script src="data/programs.js"></script>
+    <script src="data/programs-spanish.js"></script>
+    <script src="data/programs-russian.js"></script>
+    <script src="data/programs-urdu.js"></script>
+    <script src="data/subway-times.js"></script>
+    <script src="data/testimonials.js"></script>
+    <script src="website/translations/english.js"></script>
+    <script src="website/translations/spanish.js"></script>
+    <script src="website/translations/russian.js"></script>
+    <script src="website/translations/urdu.js"></script>
+    <script src="website/languages.js"></script>
+    <script src="website/neighborhoods.js"></script>
+    <script src="website/dates.js"></script>
+    <script src="website/distance.js"></script>
+    <script src="website/find-programs.js"></script>
+    <script src="website/variables.js"></script>
+    <script src="website/helpers.js"></script>
+    <script src="website/language-menu.js"></script>
+    <script src="website/form.js"></script>
+    <script src="website/calendar.js"></script>
+    <script src="website/my-list.js"></script>
+    <script src="website/program-card.js"></script>
+    <script src="website/results.js"></script>
+    <script src="website/page.js"></script>
+</body>
+</html>
